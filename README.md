@@ -11,4 +11,3 @@ Source: CSV file
 - Interactive widget filtering
 - Data table display
 - Plotly chart with labels and legend
-- Insights section with explanation
