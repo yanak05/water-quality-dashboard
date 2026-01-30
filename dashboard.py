@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from apis import apod_generator
+import os
 
 # in the terminal run: streamlit run dashboard.py
 # if prompts you to enter email, just press enter/run
@@ -17,7 +19,7 @@ tab1, tab2, tab3, tab4 = st.tabs(
     ["Descriptive Statistics",
      "2d Plots",
      "3d Plots",
-     "More"]
+     "NASA's APOD"]
 )
 
 with tab1:
@@ -49,4 +51,11 @@ with tab3:
     st.plotly_chart(fig3)
 
 with tab4:
-    st.warning("More coming soon")
+    st.header("NASA's Astronomy Picture of the Day")
+    # TODO: call a function that generates the APOD
+    url = "https://api.nasa.gov/planetary/apod?api_key="
+    response = apod_generator(url,os.getenv("NASA_API_KEY"))
+
+    # TODO: display the APOD image and title
+    st.subheader(response["title"])
+    st.image(response["hdurl"])
